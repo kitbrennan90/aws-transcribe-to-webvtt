@@ -70,9 +70,9 @@ class TranscriberTest extends TestCase
             ->getOutputAsString();
 
         $this->assertStringContainsString(
-            '00:00:01.900 --> 00:00:02.870',
+            '00:00:00.000 --> 00:00:01.900',
             $result,
-            'Cue is under 1 second'
+            'Cue is under 2 seconds (rounded down)'
         );
     }
 

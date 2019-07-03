@@ -2,6 +2,9 @@
 
 This PHP package lets you take a JSON output from Amazon Transcribe and convert it into a valid WebVTT file to use as video subtitles.
 
+[![Build Status](https://travis-ci.org/kitbrennan90/aws-transcribe-to-webvtt.svg?branch=master)](https://travis-ci.org/kitbrennan90/aws-transcribe-to-webvtt)
+![Packagist](https://img.shields.io/packagist/l/kitbrennan90/aws-transcribe-to-webvtt.svg)
+
 ### Installation
 
 You can install this library via Composer. Run the following command:
