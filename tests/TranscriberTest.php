@@ -27,8 +27,8 @@ class TranscriberTest extends TestCase
         $new = new Transcriber();
         $result = $new->setAwsTranscription($file)->getOutputAsString();
 
-        $this->assertStringContainsString('The bottom line is we have to improve our', $result);
-        $this->assertStringContainsString('00:00:00.000', $result, 'Transcript starts at 0');
+        $this->assertContains('The bottom line is we have to improve our', $result);
+        $this->assertContains('00:00:00.000', $result, 'Transcript starts at 0');
     }
 
     /**
@@ -44,12 +44,12 @@ class TranscriberTest extends TestCase
             ->setSecondPostponement(3)
             ->getOutputAsString();
 
-        $this->assertStringContainsString(
+        $this->assertContains(
             '00:00:03.000',
             $result,
             'Transcription should start at 3 seconds'
         );
-        $this->assertStringNotContainsString(
+        $this->assertNotContains(
             '00:00:00.000',
             $result,
             'Transcription should not start at 0'
@@ -69,7 +69,7 @@ class TranscriberTest extends TestCase
             ->setMaxCueTimeLength(1)
             ->getOutputAsString();
 
-        $this->assertStringContainsString(
+        $this->assertContains(
             '00:00:00.000 --> 00:00:01.900',
             $result,
             'Cue is under 2 seconds (rounded down)'
@@ -89,7 +89,7 @@ class TranscriberTest extends TestCase
             ->setMaxCueStringLength(4)
             ->getOutputAsString();
 
-        $this->assertStringContainsString(
+        $this->assertContains(
             '- bottom',
             $result,
             'First word is broken immediately'
