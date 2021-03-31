@@ -1,6 +1,7 @@
 <?php
 
 use AwsTranscribeToWebVTT\Transcriber;
+use AwsTranscribeToWebVTT\Writer;
 use AwsTranscribeToWebVTT\Exception\NotJsonException;
 use PHPUnit\Framework\TestCase;
 
@@ -94,5 +95,19 @@ class TranscriberTest extends TestCase
             $result,
             'First word is broken immediately'
         );
+    }
+
+    public function testExtendingWriter()
+    {
+        $file = file_get_contents("./tests/stub/aws_transcription_stub.json");
+
+        $new = new Transcriber(new class extends Writer {
+            protected function writeCueTrack(string $track) {
+                $this->writeLine('- ' . strtoupper($track));
+            }
+        });
+        $result = $new->setAwsTranscription($file)->getOutputAsString();
+
+        $this->assertContains('THE BOTTOM LINE IS WE HAVE TO IMPROVE OUR', $result);
     }
 }
