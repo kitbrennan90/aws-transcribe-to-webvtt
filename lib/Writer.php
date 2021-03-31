@@ -21,13 +21,13 @@ class Writer
      * String that will contain our output document
      * @var string
      */
-    private $outputString = '';
+    protected $outputString = '';
 
     /**
      * Time format that must be used in WebVTT documents
      * @var string
      */
-    private $outputTimeFormat = 'H:i:s\.v';
+    protected $outputTimeFormat = 'H:i:s\.v';
 
     /**
      * Writer constructor.
@@ -53,7 +53,7 @@ class Writer
     /**
      * Writes the header for the webvtt document
      */
-    private function writeHeader()
+    protected function writeHeader()
     {
         $this->writeLine('WEBVTT');
         $this->writeEmptyLine();
@@ -63,7 +63,7 @@ class Writer
      * Writes a new line to the file contents
      * @param string $contents
      */
-    private function writeLine(string $contents)
+    protected function writeLine(string $contents)
     {
         $this->outputString .= $contents . self::END_OF_LINE;
     }
@@ -71,7 +71,7 @@ class Writer
     /**
      * Writes an empty line to the file contents
      */
-    private function writeEmptyLine()
+    protected function writeEmptyLine()
     {
         $this->outputString .= self::END_OF_LINE;
     }
@@ -80,7 +80,7 @@ class Writer
      * @param DateTime $startTime
      * @param DateTime $endTime
      */
-    private function writeCueTime(DateTime $startTime, DateTime $endTime)
+    protected function writeCueTime(DateTime $startTime, DateTime $endTime)
     {
         $string = $startTime->format($this->outputTimeFormat) . ' --> ' . $endTime->format($this->outputTimeFormat);
         $this->writeLine($string);
@@ -89,7 +89,7 @@ class Writer
     /**
      * @param array $tracks
      */
-    private function writeCueTracks(array $tracks)
+    protected function writeCueTracks(array $tracks)
     {
         foreach ($tracks as $track) {
             $this->writeCueTrack($track);
@@ -99,7 +99,7 @@ class Writer
     /**
      * @param string $track
      */
-    private function writeCueTrack(string $track)
+    protected function writeCueTrack(string $track)
     {
         $this->writeLine('- ' . $track);
     }
