@@ -52,6 +52,16 @@ class Transcriber
     private $speakerSegments = null;
 
     /**
+     * Create a new transcriber.
+     *
+     * @param Writer $writer
+     */
+    public function __construct(Writer $writer = null)
+    {
+        $this->writer = $writer ? $writer : new Writer;
+    }
+
+    /**
      * Accepts a string of encoded json and converts it into a buffered webVTT file
      *
      * @return string
@@ -59,7 +69,6 @@ class Transcriber
      */
     public function getOutputAsString(): string
     {
-        $this->writer = new Writer();
         $this->cueBuffer = new CueBuffer($this->secondPostponement);
         $this->speakerSegments = $this->awsTranscription->results->speaker_labels->segments ?? null;
 
